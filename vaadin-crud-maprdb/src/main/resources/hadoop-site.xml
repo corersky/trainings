@@ -1,0 +1,11 @@
+
+<configuration>
+
+    <!--- global properties -->
+
+    <property>
+        <name>fs.mapr.bailout.on.library.mismatch</name>
+        <value>false</value>
+        <description>version of this configuration file</description>
+    </property>
+</configuration>
