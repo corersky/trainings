@@ -14,7 +14,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-crud-with-vaadin'
+    baseName = 'spring-crud-maprdb'
     version =  '0.1.0'
 }
 /*
@@ -37,15 +37,9 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-dependencyManagement {
-  imports {
-    mavenBom 'com.vaadin:vaadin-bom:8.0.5'
-  }
-}
-
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter")
-    compile("com.vaadin:vaadin-spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-starter:1.4.3.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-freemarker:1.4.3.RELEASE")
     compile("com.mapr.db:maprdb:5.2.2-mapr") {
         exclude group: 'org.slf4j'
     }

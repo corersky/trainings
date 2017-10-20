@@ -1,0 +1,17 @@
+
+
+allprojects {
+    group = 'com.mapr.training'
+    apply plugin: 'idea'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+}
+
+idea {
+    module {
+        downloadSources = true
+    }
+}
