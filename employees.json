@@ -1,0 +1,10 @@
+
+{
+  "name": "John Doe",
+  "age": 34,
+  "salary": 123456,
+  "skills": [
+    {"skill": "Java Programming", "rating": 8},
+    {"skill": "Excel", "rating": 4}
+  ]
+}
