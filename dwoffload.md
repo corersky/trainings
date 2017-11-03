@@ -89,8 +89,33 @@ Rows AVG(Salary)
 Show values from Razor SQL.
 
 
+# Spark
 
-# Convert data to parquet
+/opt/mapr/spark/spark-2.1.0/bin/spark-shell
 
-1. Show data on filesystem
-TODO
+/mapr/demo.mapr.com/demo/employees/json/EMPLOYEES/*/*.json
+/mapr/demo.mapr.com/demo/employees/json/SALARIES/*/*.json
+/mapr/demo.mapr.com/demo/employees/json/TITLES/*/*.json
+
+val employees = spark.read.json("/demo/employees/json/EMPLOYEES/*/*.json")
+employees.show()
+val salaries = spark.read.json("/demo/employees/json/SALARIES/*/*.json")
+salaries.show()
+val titles  = spark.read.json("/demo/employees/json/TITLES/*/*.json")
+titles.show()
+
+employees.createOrReplaceTempView("employees")
+titles.createOrReplaceTempView("titles")
+salaries.createOrReplaceTempView("salaries")
+
+val avgSal = spark.sql("select GENDER, TITLE, round(avg(SALARY),2) AS AVG_SALARY from SALARIES s INNER JOIN TITLES t ON t.EMP_NO = s.EMP_NO INNER JOIN EMPLOYEES e ON s.EMP_NO = e.EMP_NO group by GENDER, TITLE ORDER BY TITLE, GENDER")
+avgSal.show()
+
+val emp_title = employees.join(titles, "EMP_NO")
+val emp_title_sal = emp_title.join(salaries, "EMP_NO")
+
+emp_title_sal.createOrReplaceTempView("emp_title_sal")
+val avgSal = spark.sql("select GENDER, TITLE, round(avg(SALARY),2) AS AVG_SALARY from emp_title_sal group by GENDER, TITLE ORDER BY TITLE, GENDER")
+avgSal.show()
+val res = emp_title_sal.groupBy("TITLE", "GENDER").agg(avg($"SALARY").as("AVG_SALARY"))
+res.show()
