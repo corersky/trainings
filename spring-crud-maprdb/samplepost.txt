@@ -1,0 +1,12 @@
+http://localhost:11111/salaries/api/gyro
+http://localhost:11111/salaries/api/gyro/delete
+
+{
+  "temperature": 23.1,
+  "rawX": 1,
+  "rawY": 1,
+  "rawY": 1,
+  "normX": 1,
+  "normY": 1,
+  "normZ": 1
+}

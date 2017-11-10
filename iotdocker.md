@@ -4,11 +4,16 @@ docker build -t devproof/salary-app .
 
 
 
-docker run -it -e MAPR_CLUSTER=demo.mapr.com -e MAPR_CLDB_HOSTS=10.0.0.94 -e MAPR_CONTAINER_USER=mapr -e MAPR_CONTAINER_UID=5000 -e MAPR_CONTAINER_GID=5000 -e MAPR_CONTAINER_GROUP=mapr -p 8080 devproof/vaadin-app
+docker run -it -e MAPR_CLUSTER=demo.mapr.com -e MAPR_CLDB_HOSTS=10.0.0.94 -e MAPR_CONTAINER_USER=mapr -e MAPR_CONTAINER_UID=5000 -e MAPR_CONTAINER_GID=5000 -e MAPR_CONTAINER_GROUP=mapr -p 8080 devproof/salary-app
 
-docker run -it -e MAPR_CLUSTER=demo.mapr.com -e MAPR_CLDB_HOSTS=10.0.0.94 -e MAPR_CONTAINER_USER=mapr -e MAPR_CONTAINER_UID=5000 -e MAPR_CONTAINER_GID=5000 -e MAPR_CONTAINER_GROUP=mapr -p 8080:8080 devproof/vaadin-app
+docker run -it -e MAPR_CLUSTER=demo.mapr.com -e MAPR_CLDB_HOSTS=10.0.0.94 -e MAPR_CONTAINER_USER=mapr -e MAPR_CONTAINER_UID=5000 -e MAPR_CONTAINER_GID=5000 -e MAPR_CONTAINER_GROUP=mapr -p 11111:11111 devproof/salary-app
+
+docker push devproof/salary-app
 
 URL: http://10.0.0.205:11111/salaries/#/
+
+
+http://10.0.0.121/#/?_k=okwcyb
 
 Setup DCOS
 
@@ -29,6 +34,7 @@ resolvers:
 ssh_key_path: /Users/chufe/.ssh/id_rsa
 ssh_port: 22
 ssh_user: centos
+
 
 ===========
 
@@ -68,3 +74,9 @@ ssh_user: centos
     "MAPR_CONTAINER_GROUP": "mapr"
   }
 }
+
+
+URL: http://10.0.0.205:11111/salaries/#/
+URL: http://10.0.0.200:11111/salaries/api/gyro/delete
+
+select * from dfs.`/demo/esp32_gyro` order by _id desc limit 20
