@@ -119,3 +119,6 @@ val avgSal = spark.sql("select GENDER, TITLE, round(avg(SALARY),2) AS AVG_SALARY
 avgSal.show()
 val res = emp_title_sal.groupBy("TITLE", "GENDER").agg(avg($"SALARY").as("AVG_SALARY"))
 res.show()
+
+store data with spark.
+res.write.mode(org.apache.spark.sql.SaveMode.Overwrite).parquet("/demo/spark_avg_salary")
